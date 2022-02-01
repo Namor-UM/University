@@ -2,7 +2,7 @@
 
 bool isThereSenseToCheckPrimes (int i, int j, int TheLeastPrime, int size) {
     if (TheLeastPrime != 2) {
-        if (((i <= size/2) && (j <= size/2)) || ((i >= size/2) && (j >= size/2))){
+        if (((i < size/2) && (j < size/2)) || ((i >= size/2) && (j >= size/2))){
             return true;
         }
     }
@@ -20,18 +20,36 @@ bool isAPrimeNumber(int number) {
 }
 
 
-void build_and_check_matrix_C(int**& C, bool& IsThereAnyPrimeNumbers, int& TheLeastPrime,
-                              int*& IndexesOfTheLeastElement, int& SumOfSquaredNegativeElements, int size)
-{
+std::vector<int> new_vector_of_elements(int size, const std::string& matrix_name){
+    std::vector<int> vector_of_elements;
+    int element;
+    for(int i = 0; i < size*size; i++){
+        std::cout << "Введите значение элемента " << (i / size) + 1 << "-й строки " <<
+        (i % size) + 1 << "-го столбца матрицы " << matrix_name << ": ";
+        std::cin >> element;
+        vector_of_elements.push_back(element);
+    }
+    return vector_of_elements;
+}
+
+
+void build_matrix(int**& matrix, std::vector<int> vector_of_elements, int size){
+    for (int i = 0; i < size; i++) {
+        matrix[i] = new int[size];
+        for (int j = 0; j < size; j++) {
+            matrix[i][j] = vector_of_elements[i*size+j];
+        }
+    }
+}
+
+
+void analyze_matrix_C(int**& C, bool& IsThereAnyPrimeNumbers, int& TheLeastPrime,
+                              int*& IndexesOfTheLeastElement, int& SumOfSquaredNegativeElements, int size){
     int value, TheLeastElement;
     for (int i = 0; i < size; i++) {
-        C[i] = new int[size];
         for (int j = 0; j < size; j++) {
-            std::cout << "Введите значение элемента " << i + 1 << "-й строки " << j + 1 << "-го столбца матрицы C: ";
-            std::cin >> value;
-            C[i][j] = value;
-
             // Здесь осуществляется поиск наименьшего элемента в матрице.
+            value = C[i][j];
             if (i == 0 && j == 0) {
                 TheLeastElement = value;
                 IndexesOfTheLeastElement[0] = 0;
@@ -58,17 +76,9 @@ void build_and_check_matrix_C(int**& C, bool& IsThereAnyPrimeNumbers, int& TheLe
     }
 }
 
+
 void build_B_type_matrixes(int**& B, int**& C, int**& B_T, int**& B_T_plus_C, int size)
 {
-    int value;
-    for (int i = 0; i < size; i++) {
-        B[i] = new int[size];
-        for (int j = 0; j < size; j++) {
-            std::cout << "Введите значение элемента " << i+1 << "-й строки " << j+1 << "-го столбца матрицы B: ";
-            std::cin >> value;
-            B[i][j] = value;
-        }
-    }
     for (int i = 0; i < size; i++) {
         B_T[i] = new int[size];
         for (int j = 0; j < size; j++) {

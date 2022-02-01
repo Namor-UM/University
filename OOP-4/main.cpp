@@ -13,25 +13,34 @@
 #include <iostream>
 #include "print_console.h"
 #include "matrix.h"
+#include <vector>
 
 
 int main() {
     int size, TheLeastPrime;
-    bool IsThereAnyPrimeNumbers;
+    bool IsThereAnyPrimeNumbers = false;
     int *IndexesOfTheLeastElement = new int[2];
     int SumOfSquaredNegativeElements = 0;
     std::cout << "Введите размер квадратных матриц: ";
     std::cin >> size;
     std::cout << "\n";
     int **C = new int *[size];
+
     // Здесь происходит заполнение матрицы C и вычисление первых трёх пунктов условия.
-    build_and_check_matrix_C(C, IsThereAnyPrimeNumbers, TheLeastPrime, IndexesOfTheLeastElement,
+
+    std::vector<int> vector_of_elements = new_vector_of_elements(size, "C");
+
+    build_matrix(C, vector_of_elements, size);
+    analyze_matrix_C(C, IsThereAnyPrimeNumbers, TheLeastPrime, IndexesOfTheLeastElement,
                              SumOfSquaredNegativeElements, size);
 
     // Здесь происходит создание матриц B, B^T, B^T+C.
     int **B = new int *[size];
     int **B_T = new int *[size];
     int **B_T_plus_C = new int *[size];
+    vector_of_elements.clear();
+    vector_of_elements = new_vector_of_elements(size, "B");
+    build_matrix(B, vector_of_elements, size);
     build_B_type_matrixes(B, C, B_T, B_T_plus_C, size);
 
 
@@ -43,6 +52,6 @@ int main() {
     /**
      * Здесь формируется отчёт о результатах всех вычислений
      */
-    print_console(A, B, B_T, C,
+    print_matrix(A, B, B_T, C,
                  IndexesOfTheLeastElement, SumOfSquaredNegativeElements, TheLeastPrime, size, IsThereAnyPrimeNumbers);
 }

@@ -1,5 +1,4 @@
 #include "print_ostream.h"
-#include <typeinfo>
 
 void print_matrix_ostream(std::ostream& Out, int** Matrix, int size)
 {

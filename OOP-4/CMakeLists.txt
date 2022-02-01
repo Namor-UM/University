@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 project(OOP-4)
 
-# или console, или file
+# Либо в консоль (console), либо в файл (file)
 set(OUT console)
 
 add_executable(main main.cpp)

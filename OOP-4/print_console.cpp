@@ -1,7 +1,7 @@
 #include "print_console.h"
 #include "print_ostream.h"
 
-void print_console(int** A, int** B, int** B_T, int** C,
+void print_matrix(int** A, int** B, int** B_T, int** C,
                    int* IndexesOfTheLeastElement, int SumOfSquaredNegativeElements, int TheLeastPrime, int size,
                    bool IsThereAnyPrimeNumbers)
 {
