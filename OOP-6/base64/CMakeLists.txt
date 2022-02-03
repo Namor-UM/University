@@ -1,3 +1,3 @@
-include_directories(${BASE64_INCLUDE_DIR})
+include_directories(${BASE_INCLUDE_DIR})
 
-add_library(base64 src/base64.cpp)
+add_library(Base64 src/Base64.cpp)

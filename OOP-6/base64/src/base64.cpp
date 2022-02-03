@@ -1,7 +1,4 @@
-#include "base64.h"
-#include <cmath>
-#include <string>
-#include <iostream>
+#include "Base64.h"
 
 
 std::string base64_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -9,7 +6,7 @@ std::string base64_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy
 
 bool is_string_base64_encoded(std::string input, int& equality_sign_count){
     int equality_sign_position[2] = {0, 0};
-    if((input.empty()) or (input.length() % 4 != 0)) {
+    if(input.length() % 4 != 0) {
         return false;
     }
     for(int i = 0; i < input.length(); i++){
@@ -114,6 +111,9 @@ std::string decode(const std::string& input){
     int equality_sign_count = 0;
     std::string buffer_string, buffer_8, result;
     result = "";
+
+    if(input.empty())
+        return "";
 
     if(!is_string_base64_encoded(input, equality_sign_count)){                // 0. Если строка не имеет вид закодированной в base64, то программа вызывает исключение.
         throw std::invalid_argument("Эта строка не закодирована в base64");
