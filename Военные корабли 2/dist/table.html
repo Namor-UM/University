@@ -1,0 +1,874 @@
+
+<html> 
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+  </head>
+  <body>
+    <div class="header-site">
+      <ul class="header"> 
+        <li class="header"><a href="index.html">Главная</a></li>
+        <li class="header marked"><a href="table.html">Таблица</a></li>
+      </ul>
+    </div>
+    <div class="header-page"><img class="header-page" src="img/header1.jpeg"/>
+      <div><span class="header-page-text">Таблица самых длинных военных кораблей</span></div>
+    </div>
+    <div class="content">
+      <details> 
+        <summary>Настройки таблицы</summary>
+        <form>
+          <div class="with-scroll">
+            <table cellpadding="7">
+              <tr> 
+                <th colspan="2">Фильтры таблицы</th>
+                <th colspan="2">Сортировка таблицы </th>
+                <th colspan="2">Настройки графика</th>
+              </tr>
+              <tr> 
+                <td>Название</td>
+                <td>
+                  <input type="text" name="ship_name"/>
+                </td>
+                <td>В 1-ю очередь</td>
+                <td> 
+                  <select name="first_sort_par">
+                    <option>сортировать по</option>
+                    <option>Название</option>
+                    <option>Количество</option>
+                    <option>Тип</option>
+                    <option>Длина, м</option>
+                    <option>Водоизмещение, т</option>
+                    <option>На службе кораблей, ед.</option>
+                    <option>В ремонте кораблей, ед.</option>
+                    <option>Строится кораблей, ед.</option>
+                    <option>Затонуло кораблей, ед.</option>
+                    <option>Списано кораблей, ед.</option>
+                    <option>Кораблей-музеев, ед.</option>
+                    <option>Принадлежность</option>
+                  </select>
+                </td>
+                <td>Ось X: </td>
+                <td> 
+                  <select name="axis_x">
+                    <option>-</option>
+                    <option>Тип</option>
+                    <option>Принадлежность</option>
+                  </select>
+                </td>
+              </tr>
+              <tr> 
+                <td>Тип</td>
+                <td> 
+                  <input type="text" name="type_name"/>
+                </td>
+                <td>Во 2-ю очередь</td>
+                <td> 
+                  <select name="second_sort_par">
+                    <option>сортировать по</option>
+                    <option>Название</option>
+                    <option>Количество</option>
+                    <option>Тип</option>
+                    <option>Длина, м</option>
+                    <option>Водоизмещение, т</option>
+                    <option>На службе кораблей, ед.</option>
+                    <option>В ремонте кораблей, ед.</option>
+                    <option>Строится кораблей, ед.</option>
+                    <option>Затонуло кораблей, ед.</option>
+                    <option>Списано кораблей, ед.</option>
+                    <option>Кораблей-музеев, ед.</option>
+                    <option>Принадлежность</option>
+                  </select>
+                </td>
+                <td>Ось Y </td>
+                <td> 
+                  <select name="axis_y">
+                    <option>Общее количество</option>
+                    <option>Макс. длина, м</option>
+                    <option>Макс. водоизмещение, т</option>
+                    <option>На службе кораблей, ед.</option>
+                    <option>В ремонте кораблей, ед.</option>
+                    <option>Строится кораблей, ед.</option>
+                    <option>Затонуло кораблей, ед.</option>
+                    <option>Списано кораблей, ед.</option>
+                    <option>Кораблей-музеев, ед.</option>
+                  </select>
+                </td>
+              </tr>
+              <tr> 
+                <td>Принадл.</td>
+                <td> 
+                  <input type="text" name="operator_name"/>
+                </td>
+                <td>Порядок</td>
+                <td> 
+                  <select name="sort_order">
+                    <option>Прямой</option>
+                    <option>Обратный</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="2">Длина</td>
+                <td> 
+                  <input type="number" name="min_length" placeholder="мин.значение, м" min="100" max="400"/>
+                </td>
+              </tr>
+              <tr> 
+                <td> 
+                  <input type="number" name="max_length" placeholder="макс.значение, м" min="100" max="400"/>
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="2">Водоизм.</td>
+                <td> 
+                  <input type="number" name="min_displacement" placeholder="мин.значение, т" min="10000" max="200000"/>
+                </td>
+              </tr>
+              <tr> 
+                <td> 
+                  <input type="number" name="max_displacement" placeholder="макс.значение, т" min="10000" max="200000"/>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input type="submit" name="submit_table_options" value="Фильтровать таблицу"/>
+                </td>
+                <td colspan="2">
+                  <input type="submit" name="submit_table_sort" value="Сортировать таблицу"/>
+                </td>
+                <td colspan="2">
+                  <input type="submit" name="submit_graph_option" value="Построить график"/>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </form>
+      </details>
+      <p class="h">Таблица</p>
+      <div class="with-scroll">
+        <table class="big" cellpadding="7">
+          <tr class="head">
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Тип</th>
+            <th>Длина, м</th>
+            <th>Водоизмещение, т</th>
+            <th>На службе кораблей, ед.</th>
+            <th>В ремонте кораблей, ед.</th>
+            <th>Строится кораблей, ед.</th>
+            <th>Затонуло кораблей, ед.</th>
+            <th>Списано кораблей, ед.</th>
+            <th>Кораблей-музеев, ед.</th>
+            <th>Принадлежность</th>
+          </tr>
+          <tr class="bicolor">
+            <td>USS Энтерпрайз</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>342</td>
+            <td>94.781</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Джеральд Р. Форд</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>337</td>
+            <td>100.000</td>
+            <td>1</td>
+            <td>0</td>
+            <td>13</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Нимиц</td>
+            <td>10</td>
+            <td>Авианосец</td>
+            <td>332,8</td>
+            <td>102.00</td>
+            <td>10</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Китти Хок</td>
+            <td>3</td>
+            <td>Авианосец</td>
+            <td>332</td>
+            <td>84.914</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Форрестол</td>
+            <td>4</td>
+            <td>Авианосец</td>
+            <td>326,1</td>
+            <td>82.402</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>4</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>USS Джон Ф. Кеннеди</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>321</td>
+            <td>82.655</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Фуцзянь</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>316</td>
+            <td>80.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Китай</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Шаньдун</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>315</td>
+            <td>70.000</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Китай</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Мидуэй</td>
+            <td>3</td>
+            <td>Авианосец</td>
+            <td>305</td>
+            <td>64.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>1</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Адмирал Кузнецов</td>
+            <td>2</td>
+            <td>Авианосец</td>
+            <td>304,5</td>
+            <td>67.000</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Россия, Китай</td>
+          </tr>
+          <tr class="bicolor">
+            <td>HMS Каледония</td>
+            <td>1</td>
+            <td>Океанский лайнер</td>
+            <td>291</td>
+            <td>56.551</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Великобритания</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Адмирал Горшков</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>284</td>
+            <td>45.400</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Россия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Королева Элизабет</td>
+            <td>2</td>
+            <td>Авианосец</td>
+            <td>284</td>
+            <td>65.000</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Великобритания</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Киев</td>
+            <td>3</td>
+            <td>Авианосец</td>
+            <td>273,1</td>
+            <td>43.220</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>Россия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Лексингтон</td>
+            <td>2</td>
+            <td>Авианосец</td>
+            <td>270,7</td>
+            <td>43.055</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Айова</td>
+            <td>4</td>
+            <td>Линкор</td>
+            <td>270,54</td>
+            <td>58.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>4</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Синано</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>265,8</td>
+            <td>71.890</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Япония</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Эссекс</td>
+            <td>24</td>
+            <td>Авианосец</td>
+            <td>265,8</td>
+            <td>36.380</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>20</td>
+            <td>4</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Клемансо</td>
+            <td>2</td>
+            <td>Авианосец</td>
+            <td>265</td>
+            <td>32.800</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>Франция, Бразилия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Ямато</td>
+            <td>2</td>
+            <td>Линкор</td>
+            <td>263</td>
+            <td>72.809</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Япония</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Граф Цеппелин</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>262,5</td>
+            <td>33.550</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Германия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>HMS Худ</td>
+            <td>1</td>
+            <td>Линкор</td>
+            <td>262,3</td>
+            <td>47.430</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Великобритания</td>
+          </tr>
+          <tr class="bicolor">
+            <td>INS Викрант</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>262</td>
+            <td>40.000</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Индия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Шарль де Голль</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>261,5</td>
+            <td>42.000</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Франция</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Акаги</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>260,7</td>
+            <td>41.300</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Япония</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Тайхо</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>260,6</td>
+            <td>37.270</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Япония</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Сёкаку</td>
+            <td>2</td>
+            <td>Авианосец</td>
+            <td>257,5</td>
+            <td>32.105</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Япония</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Америка</td>
+            <td>3</td>
+            <td>Десантный корабль</td>
+            <td>257</td>
+            <td>45.000</td>
+            <td>2</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Уосп</td>
+            <td>8</td>
+            <td>Десантный корабль</td>
+            <td>257</td>
+            <td>40.500</td>
+            <td>7</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Тарава</td>
+            <td>5</td>
+            <td>Десантный корабль</td>
+            <td>254</td>
+            <td>39.400</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Киров</td>
+            <td>4</td>
+            <td>Линкор</td>
+            <td>252</td>
+            <td>28.000</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>Россия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Йорктаун</td>
+            <td>3</td>
+            <td>Авианосец</td>
+            <td>251,38</td>
+            <td>25.500</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Бисмарк</td>
+            <td>2</td>
+            <td>Линкор</td>
+            <td>251</td>
+            <td>52.600</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Германия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>HMS Вэнгард</td>
+            <td>1</td>
+            <td>Линкор</td>
+            <td>248,2</td>
+            <td>51.420</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>Великобритания</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Идзумо</td>
+            <td>2</td>
+            <td>Вертолётоносец</td>
+            <td>248</td>
+            <td>27.000</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Япония</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Ришелье</td>
+            <td>2</td>
+            <td>Линкор</td>
+            <td>247,85</td>
+            <td>47.548</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>Франция</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Кага</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>247,65</td>
+            <td>38.200</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Япония</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Аляска</td>
+            <td>2</td>
+            <td>Крейсер</td>
+            <td>246,43</td>
+            <td>34.253</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Одейшес</td>
+            <td>2</td>
+            <td>Авианосец</td>
+            <td>245</td>
+            <td>50.786</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>Великобритания</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Триест</td>
+            <td>1</td>
+            <td>Вертолётоносец</td>
+            <td>245</td>
+            <td>38.000</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Италия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Кавур</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>244</td>
+            <td>30.000</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Италия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Реноун</td>
+            <td>2</td>
+            <td>Линкор</td>
+            <td>242</td>
+            <td>37.400</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>Великобритания</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Корейджес</td>
+            <td>3</td>
+            <td>Авианосец</td>
+            <td>239,8</td>
+            <td>27.859</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>Великобритания</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Литторио</td>
+            <td>3</td>
+            <td>Линкор</td>
+            <td>237,76</td>
+            <td>45.236</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>Италия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Тип 075</td>
+            <td>3</td>
+            <td>Вертолётоносец</td>
+            <td>237</td>
+            <td>40.000</td>
+            <td>3</td>
+            <td>0</td>
+            <td>8</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Китай</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Шарнхорст</td>
+            <td>2</td>
+            <td>Линкор</td>
+            <td>235</td>
+            <td>38.700</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Германия</td>
+          </tr>
+          <tr class="bicolor">
+            <td>USS Рейнджер</td>
+            <td>1</td>
+            <td>Авианосец</td>
+            <td>234,4</td>
+            <td>17.859</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>США</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Анадолу</td>
+            <td>1</td>
+            <td>Вертолётоносец</td>
+            <td>232</td>
+            <td>27.079</td>
+            <td>1</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Турция</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Хуан Карлос I</td>
+            <td>1</td>
+            <td>Вертолётоносец</td>
+            <td>230,82</td>
+            <td>26.000</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Испания</td>
+          </tr>
+          <tr class="bicolor">
+            <td>Канберра</td>
+            <td>2</td>
+            <td>Вертолётоносец</td>
+            <td>230,82</td>
+            <td>27.500</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>Австралия</td>
+          </tr>
+        </table>
+      </div>
+      <div class="gallery"> 
+      </div>
+    </div>
+  </body>
+</html>
